@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Express Book Reviews API</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        h2 {
+            color: #444;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+        }
+        .endpoint {
+            background: #f9f9f9;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        .method {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 3px;
+            color: white;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        .get {
+            background-color: #61affe;
+        }
+        .post {
+            background-color: #49cc90;
+        }
+        .put {
+            background-color: #fca130;
+        }
+        .delete {
+            background-color: #f93e3e;
+        }
+        .path {
+            font-family: monospace;
+            font-size: 1.1em;
+        }
+        .description {
+            margin: 10px 0;
+        }
+        code {
+            background: #f5f5f5;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: monospace;
+            font-size: 0.9em;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #777;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <h1>Express Book Reviews API Documentation</h1>
+    
+    <p>This is a RESTful API for a book review application built with Express.js. The API provides endpoints for browsing books, reading reviews, and for authenticated users to add or delete their own reviews.</p>
+    
+    <h2>General User Endpoints</h2>
+    
+    <div class="endpoint">
+        <span class="method get">GET</span>
+        <span class="path">/</span>
+        <div class="description">Get all books available in the shop.</div>
+    </div>
+    
+    <div class="endpoint">
+        <span class="method get">GET</span>
+        <span class="path">/isbn/:isbn</span>
+        <div class="description">Get book details based on ISBN.</div>
+        <div>Example: <code>/isbn/1</code></div>
+    </div>
+    
+    <div class="endpoint">
+        <span class="method get">GET</span>
+        <span class="path">/author/:author</span>
+        <div class="description">Get books by a specific author.</div>
+        <div>Example: <code>/author/Jane%20Austen</code></div>
+    </div>
+    
+    <div class="endpoint">
+        <span class="method get">GET</span>
+        <span class="path">/title/:title</span>
+        <div class="description">Get books by title.</div>
+        <div>Example: <code>/title/Things%20Fall%20Apart</code></div>
+    </div>
+    
+    <div class="endpoint">
+        <span class="method get">GET</span>
+        <span class="path">/review/:isbn</span>
+        <div class="description">Get reviews for a specific book by ISBN.</div>
+        <div>Example: <code>/review/1</code></div>
+    </div>
+    
+    <h2>User Management</h2>
+    
+    <div class="endpoint">
+        <span class="method post">POST</span>
+        <span class="path">/register</span>
+        <div class="description">Register a new user.</div>
+        <div>Body: <code>{ "username": "your_username", "password": "your_password" }</code></div>
+    </div>
+    
+    <div class="endpoint">
+        <span class="method post">POST</span>
+        <span class="path">/customer/login</span>
+        <div class="description">Login with registered credentials.</div>
+        <div>Body: <code>{ "username": "your_username", "password": "your_password" }</code></div>
+    </div>
+    
+    <h2>Authenticated User Endpoints</h2>
+    
+    <div class="endpoint">
+        <span class="method put">PUT</span>
+        <span class="path">/customer/auth/review/:isbn</span>
+        <div class="description">Add or update a review for a book (requires authentication).</div>
+        <div>Query parameter: <code>review</code></div>
+        <div>Example: <code>/customer/auth/review/1?review=Great%20book!</code></div>
+    </div>
+    
+    <div class="endpoint">
+        <span class="method delete">DELETE</span>
+        <span class="path">/customer/auth/review/:isbn</span>
+        <div class="description">Delete your review for a book (requires authentication).</div>
+        <div>Example: <code>/customer/auth/review/1</code></div>
+    </div>
+    
+    <h2>Async/Promise Endpoints</h2>
+    
+    <div class="endpoint">
+        <span class="method get">GET</span>
+        <span class="path">/async/books</span>
+        <div class="description">Get all books using Async/Await.</div>
+    </div>
+    
+    <div class="endpoint">
+        <span class="method get">GET</span>
+        <span class="path">/async/isbn/:isbn</span>
+        <div class="description">Get book by ISBN using Async/Await.</div>
+        <div>Example: <code>/async/isbn/1</code></div>
+    </div>
+    
+    <div class="endpoint">
+        <span class="method get">GET</span>
+        <span class="path">/async/author/:author</span>
+        <div class="description">Get books by author using Promises.</div>
+        <div>Example: <code>/async/author/Jane%20Austen</code></div>
+    </div>
+    
+    <div class="endpoint">
+        <span class="method get">GET</span>
+        <span class="path">/async/title/:title</span>
+        <div class="description">Get books by title using Promises.</div>
+        <div>Example: <code>/async/title/Things%20Fall%20Apart</code></div>
+    </div>
+    
+    <h2>Running the API</h2>
+    
+    <p>This API is built with Node.js and Express. To run it locally:</p>
+    <ol>
+        <li>Clone the repository: <code>git clone https://github.com/Ireneusrdx/expressBookReviews.git</code></li>
+        <li>Navigate to the project directory: <code>cd expressBookReviews/final_project</code></li>
+        <li>Install dependencies: <code>npm install</code></li>
+        <li>Start the server: <code>node index.js</code></li>
+        <li>The API will be available at <code>http://localhost:5000</code></li>
+    </ol>
+    
+    <div class="footer">
+        <p>Express Book Reviews API — GitHub Project</p>
+    </div>
+</body>
+</html>
